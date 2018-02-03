@@ -64,12 +64,14 @@ class Game {
           let ground = BABYLON.Mesh.CreateGroundFromHeightMap("ground","images/brighton_height_map.png",1081,1081,250,0,120,this.scene);
 
         // Position Camera within terrain
+        // Definitely not ideal to manually position things, but until I learn the editor, it's just this for now.
         this.titlecamera = new BABYLON.FollowCamera('titlecamera',new BABYLON.Vector3(60,20,80),this.scene);
         this.titlecamera.setTarget(BABYLON.Vector3.Zero());
         this.titlecamera.rotation.x = -0.1;
 
         // Text Title / or 3D Model
-        
+        // To do .... later.
+
         /** Setup 'Snow' */
         // Create snow 
         let fountain = BABYLON.Mesh.CreateBox("fountain",1.1,this.scene);
