@@ -19,4 +19,4 @@ A 'build' folder in 'js' needs to be added and an 'image' folder (in the project
 
 # Current Features:
 
-* Displays a simple 3D scene with 'snow' effects.
+* Displays a simple 3D scene with 'snow' effects and spinning title text.

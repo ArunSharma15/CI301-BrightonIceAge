@@ -48,6 +48,8 @@ class Game {
         }
 
     titleIntro() :void{
+        //this.scene.debugLayer.show();
+
         /*Setup camera, lights and camera control*/ 
         // We need a scene to create all our geometry and babylonjs items in
          this.scene = new BABYLON.Scene(this.engine);
@@ -67,10 +69,12 @@ class Game {
         // Definitely not ideal to manually position things, but until I learn the editor, it's just this for now.
         this.titlecamera = new BABYLON.FollowCamera('titlecamera',new BABYLON.Vector3(60,20,80),this.scene);
         this.titlecamera.setTarget(BABYLON.Vector3.Zero());
-        this.titlecamera.rotation.x = -0.1;
+        this.titlecamera.rotation.x = -0.1;    
 
-        // Text Title / or 3D Model
-        // To do .... later.
+        /** Developer Camera - Allows full control - Uncomment to use */
+        //this.camera = new BABYLON.FreeCamera('freeCamera', new BABYLON.Vector3(0, 5,-10), this.scene);         
+        //this.camera.setTarget(BABYLON.Vector3.Zero());         
+        //this.camera.attachControl(this.canvas, false);
 
         /** Setup 'Snow' */
         // Create snow 
@@ -86,6 +90,27 @@ class Game {
         particleSystem.minSize = 0.01;
         particleSystem.maxSize = 0.02;
         particleSystem.start();
+       
+        /** Import 3D Model using AssetManager */
+        // AssetManager helps to load and individual manage assets from Babylon scene files.
+        // Attatch the scene to the manager.
+        var assetsManager = new BABYLON.AssetsManager(this.scene);
+        // Load in file.
+        var meshTask = assetsManager.addMeshTask("titleTask","","models/","title_text.babylon");
+        // Mesh will be positioned, scaled then animation will be begin if loading is succesful.
+        meshTask.onSuccess = function(task){
+            task.loadedMeshes[0].position = new BABYLON.Vector3(35,20,50);
+            task.loadedMeshes[0].scaling = new BABYLON.Vector3(0.5,0.5,0.5);
+            task.loadedMeshes[0].beginAnimation("title_Animation",true);
+            console.log("Mesh loaded");
+        }
+        // Print an error to the console if loading task has failed.
+        meshTask.onError = function(task){
+            console.log("Error loading mesh");
+        }
+        // Start tasks!
+        assetsManager.load();
+
     }
 
     run() : void {
