@@ -1,5 +1,9 @@
  /// <reference path="../node_modules/babylonjs/dist/preview release/babylon.d.ts" />import { Color3 } from "babylonjs";
 
+ // Import class from other file.
+import { Test } from "./test";
+// Assign new instance to use Test.
+let test = new Test();
 
 class Game {
     private canvas: HTMLCanvasElement;
@@ -48,8 +52,7 @@ class Game {
         }
 
     titleIntro() :void{
-        //this.scene.debugLayer.show();
-
+        
         /*Setup camera, lights and camera control*/ 
         // We need a scene to create all our geometry and babylonjs items in
          this.scene = new BABYLON.Scene(this.engine);
@@ -110,6 +113,10 @@ class Game {
         }
         // Start tasks!
         assetsManager.load();
+        
+        // Call imported method.
+        test.printToConsole();
+        
 
     }
 

@@ -2,3 +2,4 @@
 images
 node_modules
 js/build/game.js
+js/build/test.js
