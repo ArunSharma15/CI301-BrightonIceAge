@@ -3,3 +3,5 @@ images
 node_modules
 js/build/game.js
 js/build/test.js
+.vscode/launch.json
+js/build/title.js
