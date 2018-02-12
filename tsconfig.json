@@ -5,7 +5,11 @@
       "moduleResolution": "node",
       "outDir": "js/build",
       "rootDir": "./ts",
-      "noEmitOnError": true
+      "noEmitOnError": true,
+      "types": [
+        "babylonjs",
+        "babylonjs-gui"
+      ]
     },
     "exclude": [
       "node_modules",

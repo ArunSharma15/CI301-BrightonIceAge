@@ -15,7 +15,8 @@
     "package.json": "^2.0.1",
     "serve": "^6.4.9",
     "systemjs": "^0.20.19",
-    "typescript": "^2.7.1"
+    "typescript": "^2.7.1",
+    "babylonjs-gui": "^3.2.0-alpha7"
   },
   "author": "",
   "license": "MIT"
