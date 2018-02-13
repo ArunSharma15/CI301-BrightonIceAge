@@ -27,7 +27,7 @@ export class TitleScreen{
     public getScene():BABYLON.Scene        {return this.scene;}
     public getCamera():BABYLON.FollowCamera{return this.camera;}
     public getLight():BABYLON.Light        {return this.light};
-    public getIsSceneSkipped():Boolean     {return this.isSceneSkipped};
+    
 
     /**
      * Setup an hemispheric light.
@@ -37,6 +37,7 @@ export class TitleScreen{
         this.scene = new BABYLON.Scene(this.engine);
         // Create lightning in our scene
         this.light = new BABYLON.HemisphericLight('skyLight', new BABYLON.Vector3(0,1,0), this.scene);
+        this.light.shadowEnabled = true;
     }
 
     /**
