@@ -21,7 +21,7 @@ export class scene1{
 
     private setupCube(){
         this.cube = BABYLON.Mesh.CreateBox("scene1box",20,this.scene);
-        this.cube.position = new BABYLON.Vector3(0,0,0);
+        this.cube.position = new BABYLON.Vector3(0,20,0);
         this.cube.material = new BABYLON.StandardMaterial("",this.scene);
         
     }
@@ -30,7 +30,6 @@ export class scene1{
         this.camera = new BABYLON.FreeCamera('scene1_cam', new BABYLON.Vector3(0,0,0), this.scene);
         this.camera.setTarget(this.cube);
         this.camera.attachControl(this.engine.getRenderingCanvas(),false);
-        
         
     }
 
@@ -72,18 +71,15 @@ export class scene1{
         text2.text = "3D Model Description Goes Here!";
         text2.color = "white";
         text2.textWrapping = true;
-
         label2.addControl(text2);
 
     }
 
-    public setupScene(){
+    public setupScene()
+    {
         this.setupCube();
         this.setupUI();
         this.setupCamera();
-        
-        
-        
     }
 
 

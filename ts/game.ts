@@ -30,7 +30,7 @@ class Game {
      * Setup and run the main title screen.
      */
     public runTitleScene():void{
-        let TS = new TitleScreen(this.engine,true);
+        let TS = new TitleScreen(this.engine,false);
         TS.setupScene();
         this.camera = TS.getCamera();
         this.scene = TS.getScene();

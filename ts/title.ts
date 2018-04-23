@@ -36,7 +36,7 @@ export class TitleScreen{
         // We need a scene to create all our geometry and babylonjs items in
         this.scene = new BABYLON.Scene(this.engine);
         // Create lightning in our scene
-        this.light = new BABYLON.HemisphericLight('skyLight', new BABYLON.Vector3(0,1,0), this.scene);
+        this.light = new BABYLON.HemisphericLight('skyLight', new BABYLON.Vector3(0,4,0), this.scene);
         this.light.shadowEnabled = true;
     }
 
@@ -47,9 +47,9 @@ export class TitleScreen{
         // Create new material
         let groundMaterial = new BABYLON.StandardMaterial("ground", this.scene);
         // Apply ground texture
-        groundMaterial.diffuseTexture = new BABYLON.Texture("images/brighton_texture.png",this.scene);
+        groundMaterial.diffuseTexture = new BABYLON.Texture("images/title/brighton_texture.png",this.scene);
         // Apply height map
-        let ground = BABYLON.Mesh.CreateGroundFromHeightMap("ground","images/brighton_height_map.png",1081,1081,250,0,120,this.scene);
+        let ground = BABYLON.Mesh.CreateGroundFromHeightMap("ground","images/title/brighton_height_map.png",1081,1081,250,0,120,this.scene);
     }
 
     /**
@@ -62,7 +62,7 @@ export class TitleScreen{
         fountain.position = new BABYLON.Vector3(59,22,79);
         // Setup particle emmitter
         var particleSystem = new BABYLON.ParticleSystem("particles", 2000, this.scene);
-        particleSystem.particleTexture = new BABYLON.Texture("images/flare.png", this.scene);
+        particleSystem.particleTexture = new BABYLON.Texture("images/title/flare.png", this.scene);
         particleSystem.emitRate = 100;
         particleSystem.emitter = fountain;
         // Need to specify that the 'snow' falls down, hence Y coordinate is only modified.
@@ -86,9 +86,7 @@ export class TitleScreen{
 
     private setupDevCamera():void{
         this.devCamera = new BABYLON.FreeCamera('devCamera', new BABYLON.Vector3(60, 20,80), this.scene);
-    
         this.devCamera.setTarget(BABYLON.Vector3.Zero());
-
         this.devCamera.attachControl(this.engine.getRenderingCanvas(), false);
     }
     
@@ -113,15 +111,34 @@ export class TitleScreen{
         }
         // Print an error to the console if loading task has failed.
         meshTask.onError = function(task){
-            console.log("Error loading mesh");
+            console.log("Error loading mesh: " + task.meshesNames);
         }
         
         // Start tasks!
         assetsManager.load();
-        
     }
 
-    
+    /**
+     * Create a SkyBox
+     */
+    private createSkyBox():void{
+        let skybox = BABYLON.MeshBuilder.CreateBox("title_SkyBox",{size:1000.0,height:2048.0,width:2048},this.scene);
+        let skyboxMat = new BABYLON.StandardMaterial("title_SkyBox",this.scene);
+        skyboxMat.backFaceCulling = false;
+        //    _________
+        //   /        /|
+        //  /    py  / |
+        // /--------/  |
+        // |       | nx/
+        // |   pz  |  /
+        // |       | /
+        // ---------/
+        skyboxMat.reflectionTexture = new BABYLON.CubeTexture("/images/title/skybox",this.scene);
+        skyboxMat.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+        skyboxMat.diffuseColor = new BABYLON.Color3(0, 0, 0);
+        skyboxMat.specularColor = new BABYLON.Color3(0, 0, 0);
+        skybox.material = skyboxMat;
+    }
 
 
     /**
@@ -138,6 +155,8 @@ export class TitleScreen{
         this.setupTerrain();
         this.setupParticleEffects();
         this.loadAssets();
+        this.createSkyBox();
+
         
     }
 
