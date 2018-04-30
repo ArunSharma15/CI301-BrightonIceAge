@@ -13,6 +13,7 @@ export class TitleScreen{
     private devCamera: BABYLON.FreeCamera;
     private light: BABYLON.Light;
     private devCameraEnabled: Boolean;
+    private skybox;
     
     //private meshLibrary:BABYLON.AbstractMesh;
 
@@ -27,6 +28,7 @@ export class TitleScreen{
     public getScene():BABYLON.Scene        {return this.scene;}
     public getCamera():BABYLON.FollowCamera{return this.camera;}
     public getLight():BABYLON.Light        {return this.light};
+    public getSkybox() {return this.skybox;}
     
 
     /**
@@ -100,7 +102,7 @@ export class TitleScreen{
         // Attatch the scene to the manager.
         var assetsManager = new BABYLON.AssetsManager(this.scene);
         // Load in file.
-        var meshTask = assetsManager.addMeshTask("titleTask","","models/","title_text.babylon");
+        var meshTask = assetsManager.addMeshTask("titleTask","","models/","IceAge_title.babylon");
         // Mesh will be positioned, scaled then animation will be begin if loading is succesful.
         meshTask.onSuccess = function(task){
             task.loadedMeshes[0].id ="title3D";
@@ -122,7 +124,7 @@ export class TitleScreen{
      * Create a SkyBox
      */
     private createSkyBox():void{
-        let skybox = BABYLON.MeshBuilder.CreateBox("title_SkyBox",{size:1000.0,height:2048.0,width:2048},this.scene);
+        this.skybox = BABYLON.MeshBuilder.CreateBox("title_SkyBox",{size:1000.0,height:2048.0,width:2048},this.scene);
         let skyboxMat = new BABYLON.StandardMaterial("title_SkyBox",this.scene);
         skyboxMat.backFaceCulling = false;
         //    _________
@@ -137,9 +139,15 @@ export class TitleScreen{
         skyboxMat.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
         skyboxMat.diffuseColor = new BABYLON.Color3(0, 0, 0);
         skyboxMat.specularColor = new BABYLON.Color3(0, 0, 0);
-        skybox.material = skyboxMat;
+        this.skybox.material = skyboxMat;
     }
 
+    /**
+     * Populate scene with an autoplaying/autolooping sound.
+     */
+    private setupSound():void{
+        let sound = new BABYLON.Sound("titleSound","/sounds/title/wind.wav",this.scene,null,{loop:true,autoplay:true});
+    }
 
     /**
      * Call methods which populate the Babylon Camera,Engine,Scene and Light Objects.
@@ -156,7 +164,7 @@ export class TitleScreen{
         this.setupParticleEffects();
         this.loadAssets();
         this.createSkyBox();
-
+        this.setupSound();
         
     }
 
