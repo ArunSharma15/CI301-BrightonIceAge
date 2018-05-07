@@ -6,7 +6,7 @@ This project utilises BabylonJS as a game engine to render 3D graphics via the w
 
 # Requirements
 
-In order to run this project you will need NodeJS and a WebGL enabled web browser. 
+In order to run this project you will need NodeJS and a WebGL enabled web browser (Do not use internet explorer). 
 
 * Install NodeJS
 * Clone this repository
@@ -19,4 +19,23 @@ A 'build' folder in 'js' needs to be added and an 'image' folder (in the project
 
 # Current Features:
 
-* Displays a simple 3D scene with 'snow' effects and spinning title text.
+* Contains 5 'stages' which examine an element of the ice age.
+* Stages consist of UI, Models and sound effects.
+* Features a variety of animations.
+
+# Sources:
+
+* Title Sound = https://freesound.org/people/InspectorJ/sounds/376415/
+* Stage 1 3D Model = https://www.turbosquid.com/3d-models/3d-planet-ark/483723
+* Stage 1 Sound =  https://freesound.org/people/ayamahambho/sounds/181676/
+
+* Stage 2 3D Model = https://www.turbosquid.com/3d-models/free-c4d-mode-anatomy-body/623330
+* Stage 2 Sound = https://freesound.org/people/InspectorJ/sounds/345560/
+
+* Stage 3 3D Model = https://www.turbosquid.com/FullPreview/Index.cfm/ID/709989
+* Stage 3 Sound =  https://freesound.org/people/13F_Panska_Petruzelova_Anna/sounds/379210/
+
+* Stage 4 3D Model = https://www.turbosquid.com/FullPreview/Index.cfm/ID/1250935
+* Stage 4 Sound = https://freesound.org/people/tomattka/sounds/401730/
+
+* SkyBox =  https://93i.de/p/free-skybox-texture-set
